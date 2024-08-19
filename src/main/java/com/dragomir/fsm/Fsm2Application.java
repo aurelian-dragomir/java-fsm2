@@ -13,20 +13,8 @@ import java.time.LocalDateTime;
 
 @SpringBootApplication
 @EnableScheduling
-public class FsmApplication {
-
+public class Fsm2Application {
     public static void main(String[] args) {
-        SpringApplication.run(FsmApplication.class, args);
-    }
-
-    @Autowired
-    private KafkaTemplate<Void, Transaction> prod;
-
-    //    @Bean
-    public CommandLineRunner runAtStartup() {
-        return args -> {
-            var t = new Transaction(1L, TransactionState.NEW, LocalDateTime.now());
-            prod.sendDefault(t);
-        };
+        SpringApplication.run(Fsm2Application.class, args);
     }
 }

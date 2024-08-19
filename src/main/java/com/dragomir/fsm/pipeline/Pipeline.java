@@ -25,7 +25,7 @@ public class Pipeline<I, O> {
     }
 
     public static <I, O> Pipeline<I, O> of(List<Step> steps, TransactionState state) {
-        int fromStepIndex = state.ordinal();
+        int fromStepIndex = state.ordinal() - TransactionState.APPLIED.ordinal();
         var p = new Pipeline<I, O>(steps.get(fromStepIndex));
         for (int i = fromStepIndex + 1; i < steps.size(); i++) {
             p = p.andThen(steps.get(i));

@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.dragomir.fsm.state.TransactionState.*;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 @Slf4j
 public class RetryScheduler {

@@ -3,7 +3,6 @@ package com.dragomir.fsm.config;
 import com.dragomir.fsm.entity.Transaction;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.VoidDeserializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.kafka.transaction.KafkaTransactionManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +19,6 @@ public class KafkaConsumerConfig {
 
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
-
-    @Autowired
-    private KafkaTransactionManager kafkaTransactionManager;
 
     @Bean
     public ConsumerFactory<Void, Transaction> consumerFactory() {
@@ -41,7 +36,6 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<Void, Transaction> containerFactory() {
         ConcurrentKafkaListenerContainerFactory<Void, Transaction> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.getContainerProperties().setKafkaAwareTransactionManager(kafkaTransactionManager);
         return factory;
     }
 }
