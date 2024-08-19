@@ -1,0 +1,36 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+  datasource:
+    url: jdbc:h2:mem:testdb;Mode=Oracle
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa.hibernate.ddl-auto: none
+
+  flyway:
+    baselineOnMigrate: true
+    locations:
+      - db/migration
+  h2:
+    console.enabled: true
+
+service1-topic: topic1
+service2-topic: topic2
+service1-group-id: group-id1
+service2-group-id: group-id2
+parallelism: 10
+
+logging:
+  level.root: error
+  level:
+    org.apache.kafka: error
+    org.springframework.kafka: error
+    org.apache.kafka.clients.consumer.internals: error
+    #    org.springframework.orm.jpa.JpaTransactionManager: trace
+    #    org.springframework.kafka.transaction: trace
+    #    org.springframework.kafka.core.DefaultKafkaProducerFactory: trace
+    com.dragomir.fsm: debug
+#    org.springframework.jdbc.core: TRACE
